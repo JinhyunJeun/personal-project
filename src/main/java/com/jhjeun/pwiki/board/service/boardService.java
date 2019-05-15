@@ -5,21 +5,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import com.jhjeun.pwiki.board.mapper.boardMapper;
-import com.jhjeun.pwiki.board.model.boardModel;
+import com.jhjeun.pwiki.board.mapper.BoardMapper;
+import com.jhjeun.pwiki.board.model.BoardModel;
 
 @Service
-public class boardService {
+public class BoardService {
     @Autowired
-    private boardMapper mapper;
+    private BoardMapper mapper;
 
-    public List<boardModel> listAll() {
-        List<boardModel> listAll = mapper.listAll();
+    public List<BoardModel> listAll() {
+        List<BoardModel> listAll = mapper.listAll();
         return listAll;
     }
 
-    public List<boardModel> selectOne(int id) {
-        List<boardModel> selectOne = mapper.selectOne(id);
+    public List<BoardModel> selectOne(int id) {
+        List<BoardModel> selectOne = mapper.selectOne(id);
         return selectOne;
     }
 
@@ -29,7 +29,7 @@ public class boardService {
         return rows;
     }
 
-    public void create(boardModel model) {
+    public void create(BoardModel model) {
         mapper.create(model);
     }
 

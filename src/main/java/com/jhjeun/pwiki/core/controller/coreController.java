@@ -1,9 +1,17 @@
 package com.jhjeun.pwiki.core.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
-public class coreController {
+public class CoreController {
 
+    @RequestMapping(value="/", method=RequestMethod.GET)
+    public String core() {
+        return "common/main";
+    }
+    
     
 }

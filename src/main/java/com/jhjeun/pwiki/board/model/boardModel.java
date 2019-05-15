@@ -3,7 +3,7 @@ package com.jhjeun.pwiki.board.model;
 import lombok.Data;
 
 @Data
-public class boardModel {
+public class BoardModel {
     private int id;
     private String title;
     private String content;

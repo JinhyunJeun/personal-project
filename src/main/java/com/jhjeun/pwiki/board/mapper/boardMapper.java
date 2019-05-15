@@ -1,17 +1,17 @@
 package com.jhjeun.pwiki.board.mapper;
 
 import java.util.List;
-import com.jhjeun.pwiki.board.model.boardModel;
+import com.jhjeun.pwiki.board.model.BoardModel;
 
 import org.apache.ibatis.annotations.Param;
 
-public interface boardMapper {
-    List<boardModel> listAll();
-    List<boardModel> selectOne(
+public interface BoardMapper {
+    List<BoardModel> listAll();
+    List<BoardModel> selectOne(
         @Param("id") int id
     );
     int countRows();
-    void create(boardModel model);
+    void create(BoardModel model);
     void deleteOne(
         @Param("id") int id
     );
