@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhjeun.pwiki.board.mapper.boardMapper">
+    <select id="listAll" resultType="com.jhjeun.pwiki.board.model">
+        <![CDATA[
+        SELECT
+            id as id,
+            title as title,
+            content as content,
+            reg_user as regUser,
+            reg_dt as regDt,
+            menu_icon as icon,
+            tags as tags
+        FROM
+        tbl_board
+        WHERE 
+        delete_yn = 'N'
+        ]]>
+    </select>
+    <select id="selectOne" resultType="com.jhjeun.pwiki.board.model">
+        <![CDATA[
+        SELECT
+            title as title,
+            content as content,
+            reg_User as regUser,
+            reg_dt as regDt,
+            tags as tags
+        FROM
+        tbl_board
+        WHERE
+        id = #{id}
+        and
+        delete_yn = 'N'
+        ]]>
+    </select>
+    <select id="countRows" resultType="int">
+        <![CDATA[
+        SELECT
+        count(*)
+        FROM tbl_board
+        ]]>
+    </select>
+    <insert id="create">
+        <![CDATA[
+        INSERT into tbl_board
+        (
+            id,
+            title,
+            content,
+            reg_user,
+            delete_yn,
+            tags
+        )
+        VALUES 
+        (
+            #{id},
+            #{title},
+            #{content},
+            #{regUser},
+            #{deleteYn},
+            #{tags}
+        )
+        ]]>
+    </insert>
+    <delete id="deleteOne">
+        <![CDATA[
+        DELETE from tbl_board
+        WHERE
+        id=#{id}
+        ]]>
+    </delete>
+    <update id="updateOne">
+        <![CDATA[
+        UPDATE tbl_board
+        SET
+            (
+                title = #{title},
+                content = #{content},
+                reg_user = #{regUser},
+                delete_yn = #{deleteYn},
+                tags = #{tags}
+            )
+        WHERE id = #{id}
+        ]]>
+    </update>
+    <update id="updateDelete">
+        <![CDATA[
+        UPDATE tbl_board
+        SET
+            (
+                delete_yn = 'Y'
+            )
+        WHERE id = #{id}
+        ]]>
+    </update>
+</mapper>

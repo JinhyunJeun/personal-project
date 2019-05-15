@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MainApplication",
+            "request": "launch",
+            "mainClass": "com.jhjeun.pwiki.MainApplication",
+            "projectName": "pwiki"
+        }
+    ]
+}
