@@ -38,7 +38,9 @@ public class BoardController {
     @RequestMapping(value="/api/list_view", method=RequestMethod.GET)
     public Model list_view(Model model){
         List<BoardModel> list = service.listAll();
+        System.out.println(list.toString());
         model.addAttribute("list", list);
+        System.out.println(model.toString());
         return model;
     }
 

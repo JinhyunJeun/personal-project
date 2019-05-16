@@ -7,11 +7,9 @@
 <head>
     <jsp:include page="./common_head.jsp"/>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
    <jsp:include page="./header.jsp"/>
    <jsp:include page="./contents.jsp"/>
    <jsp:include page="./footer.jsp"/>
    <jsp:include page="./common_footer.jsp"/>
    <jsp:include page="./footerScript.jsp"/>
-</body>
 </html>

@@ -1,19 +1,103 @@
 <%@ page language="java" contentType="text/html charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http:/java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<html>
 <head>
-    <jsp:include page="./common_head.jsp"/>
+    <jsp:include page="../common/common_head.jsp"/>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-   <jsp:include page="./header.jsp"/>
+
+<jsp:include page="../common/header.jsp"/>
    
-    <p>testList</p>
-   
-   <jsp:include page="./footer.jsp"/>
-   <jsp:include page="./common_footer.jsp"/>
-   <jsp:include page="./footerScript.jsp"/>
-</body>
-</html>
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        WILT(What I Learned Today)
+        <small>Git</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">WILT</a></li>
+        <li class="active">Git</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">List</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="id_git_List_view" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <td>
+                        <button type="button" id="btn_GoList" class="btn btn-danger">뒤로가기</button>
+                    </td>
+                    <td>
+                        <button type="button" id="btn_create" class="btn btn-danger">새 글 쓰기</button>
+                    </td>
+                </tfoot>
+              </table>
+              <p>test</p>
+              <p>${list.id}</p>
+              <p>${list.title}</p>
+              <p>${list.regDt}</p>
+              <p>${list.content}</p>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  
+<script>
+$('#id_git_List_view').Datatable({
+    ajax({
+        url:'/board/api/list_view',
+        method: 'get',
+        dataSrc: 'data',
+        data: [
+            <c:forEach var="list" items="${list}">
+            {
+                "id": "${list.id}",
+                "title": "${list.title}",
+                "regUser": "${list.regUser}",
+                "regDt": "${list.regDt}"
+            }
+            </c:forEach>
+        ],
+        columns: [
+            {data: 'id'},
+            {data: 'title'},
+            {data: 'regUser'},
+            {data: 'regDt'}
+            }
+        ]
+    })
+});
+</script>
+
+<jsp:include page="../common/footer.jsp"/>
+<jsp:include page="../common/common_footer.jsp"/>
+<jsp:include page="../common/datatable.jsp"/>   
+<jsp:include page="../common/footerScript.jsp"/>

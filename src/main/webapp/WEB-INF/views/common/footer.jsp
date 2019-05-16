@@ -8,7 +8,7 @@
     reserved.
   </footer>
 
-  <!-- Control Sidebar -->
+  <%-- <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
     <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
@@ -201,4 +201,5 @@
   <div class="control-sidebar-bg"></div>
 
 </div>
-<!-- ./wrapper -->
+<!-- ./wrapper --> --%>
+</body>
