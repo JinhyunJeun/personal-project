@@ -6,12 +6,15 @@ import com.jhjeun.pwiki.board.model.BoardModel;
 import com.jhjeun.pwiki.board.service.BoardService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/board/*")
@@ -36,19 +39,25 @@ public class BoardController {
     }
     
     @RequestMapping(value="/api/list_view", method=RequestMethod.GET)
-    public Model list_view(Model model){
+    @ResponseBody
+    public List<BoardModel> list(){
         List<BoardModel> list = service.listAll();
-        System.out.println(list.toString());
-        model.addAttribute("list", list);
-        System.out.println(model.toString());
-        return model;
+        System.out.println(list);
+        return list;
     }
 
+    // @RequestMapping(value="/api/list_view", method=RequestMethod.GET)
+    // public List<BoardModel> list(){
+    //     List<BoardModel> list = service.listAll();
+        
+    //     return list;
+    // }
+
     @RequestMapping(value="/api/detail_view_{id}", method=RequestMethod.GET)
-    public Model detail_view(@PathVariable int id, @RequestParam String deleteYn, Model model) {
+    public List<BoardModel> detail_view(@PathVariable int id, @RequestParam String deleteYn, Model model) {
         List<BoardModel> list = service.selectOne(id);
-        model.addAttribute("list", list);
-        return model;
+        
+        return list;
     }
 
     @RequestMapping(value="/api/create", method=RequestMethod.GET)

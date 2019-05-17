@@ -10,7 +10,8 @@
             reg_user as regUser,
             reg_dt as regDt,
             menu_icon as icon,
-            tags as tags
+            tags as tags,
+            delete_yn as deleteYn
         FROM
         tbl_board
         WHERE 

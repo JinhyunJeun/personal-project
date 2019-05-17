@@ -34,13 +34,14 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="id_git_List_view" class="table table-bordered table-hover">
+              <table id="id_git_List_view" class="table table-bordered table-hover display">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>regUser</th>
+                        <th>regDt</th>
+                        <th>tags</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -52,11 +53,8 @@
                     </td>
                 </tfoot>
               </table>
-              <p>test</p>
-              <p>${list.id}</p>
-              <p>${list.title}</p>
-              <p>${list.regDt}</p>
-              <p>${list.content}</p>
+              
+              
             </div>
             <!-- /.box-body -->
           </div>
@@ -70,34 +68,26 @@
   </div>
   <!-- /.content-wrapper -->
   
-<script>
-$('#id_git_List_view').Datatable({
-    ajax({
-        url:'/board/api/list_view',
-        method: 'get',
-        dataSrc: 'data',
-        data: [
-            <c:forEach var="list" items="${list}">
-            {
-                "id": "${list.id}",
-                "title": "${list.title}",
-                "regUser": "${list.regUser}",
-                "regDt": "${list.regDt}"
-            }
-            </c:forEach>
-        ],
-        columns: [
-            {data: 'id'},
-            {data: 'title'},
-            {data: 'regUser'},
-            {data: 'regDt'}
-            }
-        ]
-    })
-});
-</script>
-
 <jsp:include page="../common/footer.jsp"/>
 <jsp:include page="../common/common_footer.jsp"/>
-<jsp:include page="../common/datatable.jsp"/>   
+<jsp:include page="../common/datatable.jsp"/>
 <jsp:include page="../common/footerScript.jsp"/>
+<script>
+$(document).ready(function(){
+  $('#id_git_List_view').DataTable({
+      ajax: {
+          url:'/board/api/list_view',
+          dataSrc: '',
+          pageLength: 10,
+          processing: true,
+          columns: [
+              {data: "id"},
+              {data: "title"},
+              {data: "regUser"},
+              {data: "regDt"},
+              {data: "tags"}
+          ]
+      }
+  });
+});
+</script>
