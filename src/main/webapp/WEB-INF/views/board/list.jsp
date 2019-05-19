@@ -75,21 +75,21 @@
 <jsp:include page="../common/datatable.jsp"/>
 <jsp:include page="../common/footerScript.jsp"/>
 <script>
-$(document).ready(function(){
+// $(document).ready(function(){
   $('#id_git_List_view').DataTable({
       ajax: {
           url:'/board/api/list_view',
           dataSrc: '',
           pageLength: 10,
           processing: true,
+      },
           columns: [
-              {data: "id"},
-              {data: "title"},
-              {data: "regUser"},
-              {data: "regDt"},
-              {data: "tags"}
+              { data: "id" },
+              { data: "title" },
+              { data: "regUser" },
+              { data: "regDt" },
+              { data: "tags" }
           ]
-      }
   });
-});
+// });
 </script>
