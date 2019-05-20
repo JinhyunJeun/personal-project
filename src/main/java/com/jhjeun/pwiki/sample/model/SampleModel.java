@@ -3,7 +3,7 @@ package com.jhjeun.pwiki.sample.model;
 import lombok.Data;
 
 @Data
-public class sampleModel {
+public class SampleModel {
     private int id;
     private String title;
     private String regUser;

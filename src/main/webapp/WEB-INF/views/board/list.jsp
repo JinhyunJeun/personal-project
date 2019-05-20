@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,8 +82,8 @@
           dataSrc: '',
           pageLength: 10,
           processing: true,
-          columns: [
       },
+          columns: [
               {data: "id"},
               {data: "title"},
               {data: "regUser"},
