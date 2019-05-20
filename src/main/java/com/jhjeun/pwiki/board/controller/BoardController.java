@@ -40,7 +40,6 @@ public class BoardController {
     @ResponseBody
     public List<BoardModel> list(){
         List<BoardModel> list = service.listAll();
-        System.out.println(list);
         return list;
     }
 
