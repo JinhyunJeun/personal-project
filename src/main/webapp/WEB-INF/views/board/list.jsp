@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<!DOCTYPE html>
+<html>
 <head>
     <jsp:include page="../common/common_head.jsp"/>
 </head>
@@ -73,7 +74,7 @@
 <jsp:include page="../common/datatable.jsp"/>
 <jsp:include page="../common/footerScript.jsp"/>
 <script>
-$(document).ready(function(){
+// $(document).ready(function(){
   $('#id_git_List_view').DataTable({
       ajax: {
           url:'/board/api/list_view',
@@ -81,13 +82,13 @@ $(document).ready(function(){
           pageLength: 10,
           processing: true,
           columns: [
+      },
               {data: "id"},
               {data: "title"},
               {data: "regUser"},
               {data: "regDt"},
               {data: "tags"}
           ]
-      }
   });
-});
+// });
 </script>
