@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,8 +51,10 @@ public class BoardController {
         return list;
     }
 
-    @RequestMapping(value="/api/create", method=RequestMethod.GET)
-    public void form(BoardModel model, Model md) {
+    @RequestMapping(value="/api/create", method=RequestMethod.POST)
+    @ResponseBody
+    public void form(@RequestBody BoardModel model) {
+        model.setDeleteYn("N");
         service.create(model);
     }
 }

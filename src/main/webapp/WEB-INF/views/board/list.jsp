@@ -41,9 +41,9 @@
                     <tr>
                         <th></th>
                         <th>title</th>
+                        <th>tags</th>
                         <th>regUser</th>
                         <th>regDt</th>
-                        <th>tags</th>
                     </tr>
                 </thead>
               </table>
@@ -64,65 +64,49 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
                   <form role="form" id="modal_Create_Form">
-                  <div class="box-body">
-                      <div class="form-group">
-                          <input type="text" name="modal_Title" id="modal_Title" class="form-control" placeholder="Untitled"/>
-                      </div>
-                      <div class="form-group">
-                          <div class="row">  
-                              <div class="col-md-3">
-                                  <label for="modal_Tags" class="fa fa-bars">&emsp;Tags</label>
+                      <div class="box-body">
+                          <div class="form-group">
+                              <input type="text" name="modal_Title" id="modal_Title" class="form-control" placeholder="Untitled"/>
+                          </div>
+                          <div class="form-group">
+                              <div class="row">  
+                                  <div class="col-md-3">
+                                      <label for="modal_Tags" class="fa fa-bars">&emsp;Tags</label>
+                                  </div>
+                                  <div class="col-md-9">
+                                      <input type="text" name="modal_Tags" id="modal_Tags" placeholder="Empty" class="form-control"/>
+                                  </div>
                               </div>
-                              <div class="col-md-9">
-                                  <input type="text" name="modal_Tags" id="modal_Tags" placeholder="Empty" class="form-control"/>
+                              <div class="row">
+                                  <div class="col-md-3">
+                                      <label class="fa fa-clock-o">&emsp;Created</label>
+                                  </div>
+                                  <div class="col-md-9" id="modal_CreatedTime"></div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-3">
+                                      <label class="fa fa-clock-o">&emsp;Updated</label>
+                                  </div>
+                                  <div class="col-md-9" id="modal_UpdatedTime"></div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-3">
+                                      <label for="modal_Url" class="fa fa-link">&emsp;Url</label>
+                                  </div>
+                                  <div class="col-md-9">
+                                      <input type="text" name="modal_Url" id="modal_Url" class="form-control" placeholder="Empty"/>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                      <input type="text" name="modal_Add_Property" id="modal_Add_Property" class="form-control" placeholder="Add a Property"/>
+                                  </div>
                               </div>
                           </div>
-                          <div class="row">
-                              <div class="col-md-3">
-                                  <label class="fa fa-clock-o">&emsp;Created</label>
-                              </div>
-                              <div class="col-md-9" id="modal_CreatedTime"></div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-3">
-                                  <label class="fa fa-clock-o">&emsp;Updated</label>
-                              </div>
-                              <div class="col-md-9" id="modal_UpdatedTime"></div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-3">
-                                  <label for="modal_Url" class="fa fa-link">&emsp;Url</label>
-                              </div>
-                              <div class="col-md-9">
-                                  <input type="text" name="modal_Url" id="modal_Url" class="form-control" placeholder="Empty"/>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-12">
-                                  <input type="text" name="modal_Add_Property" id="modal_Add_Property" class="form-control" placeholder="Add a Property"/>
-                              </div>
-                          </div>
-                      </div>
-                    <div class="form-group">
-                      <textarea type="text" class="form-control" id="modal_Content"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputFile">File input</label>
-                      <input type="file" id="exampleInputFile">
-
-                      <p class="help-block">Example block-level help text here.</p>
-                    </div>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Check me out
-                      </label>
-                    </div>
-                  </div>
-                  <!-- /.box-body -->
-                  <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </div>
-                </form>
+                        <div class="form-group">
+                          <textarea type="text" class="form-control" id="modal_Content"></textarea>
+                        </div>
+                  </form>
                 
               </div>
               <div class="modal-body">
@@ -130,7 +114,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" id="btn_submit" class="btn btn-primary">Save changes</button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -153,17 +137,18 @@ $(document).ready(function(){
       ajax: {
           url:'/board/api/list_view',
           dataSrc: '',
-          pageLength: 10,
           processing: true,
+          paging: true
       },
           columns: [
-              {data: "id"},
-              {data: "title"},
-              {data: "regUser"},
-              {data: "regDt"},
-              {data: "tags"}
+              { data: "id" },
+              { width: "70%", data: "title" },
+              { width: "30%", data: "tags" },
+              { data: "regUser" },
+              { data: "regDt" }
           ]
   });
+  
   function currentTime(){
       var today = new Date();
       var yyyy = today.getFullYear();
@@ -184,11 +169,37 @@ $(document).ready(function(){
       today = yyyy+'년'+' '+mm+'월'+' '+dd+'일,'+' '+hour+':'+minutes+'분';
       return today;
   };
+  
   $('#btn_create').click(function(){
     //   console.log(currentTime());
       var now = currentTime();
       $('#modal_CreatedTime').html('<span>'+now+'</span>');
       $('#modal_UpdatedTime').html('<span>'+now+'</span>');
+  });
+  
+  $('#btn_submit').click(function(){
+    var reqData = {
+      title: $('#modal_Title').val(),
+      tags: $('#modal_Tags').val(),
+      regDt: $('#modal_CreatedTime').val(),
+      content: $('#modal_Content').val(),
+      url: $('#modal_Url').val(),
+      property: $('#modal_Add_Property').val()
+    }
+    $.ajax({
+        url: "/board/api/create",
+        method: "POST",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(reqData),
+        success: function() {
+          alert('success');
+          window.close();
+          location.href="/board/list_view";
+        },
+        error: function() {
+          alert('ajax error');
+        }
+    });
   });
 });
 </script>

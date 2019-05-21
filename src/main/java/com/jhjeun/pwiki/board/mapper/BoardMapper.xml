@@ -9,9 +9,9 @@
             content as content,
             reg_user as regUser,
             reg_dt as regDt,
+            upd_dt as updDt,
             menu_icon as icon,
-            tags as tags,
-            delete_yn as deleteYn
+            tags as tags
         FROM
         tbl_board
         WHERE 
@@ -25,7 +25,9 @@
             content as content,
             reg_User as regUser,
             reg_dt as regDt,
-            tags as tags
+            upd_dt as updDt,
+            tags as tags,
+            property
         FROM
         tbl_board
         WHERE
@@ -45,21 +47,23 @@
         <![CDATA[
         INSERT into tbl_board
         (
-            id,
             title,
             content,
             reg_user,
             delete_yn,
-            tags
+            tags,
+            upd_dt,
+            property
         )
         VALUES 
         (
-            #{id},
             #{title},
             #{content},
             #{regUser},
             #{deleteYn},
-            #{tags}
+            #{tags},
+            #{updDt},
+            #{property}
         )
         ]]>
     </insert>
@@ -77,8 +81,8 @@
             (
                 title = #{title},
                 content = #{content},
-                reg_user = #{regUser},
-                delete_yn = #{deleteYn},
+                upd_dt = #{updDt},
+                property = #{property},
                 tags = #{tags}
             )
         WHERE id = #{id}

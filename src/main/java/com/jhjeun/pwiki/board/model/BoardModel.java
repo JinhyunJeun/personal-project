@@ -12,4 +12,6 @@ public class BoardModel {
     private String icon;
     private String deleteYn;
     private String tags;
+    private String updDt;
+    private String property;
 }
