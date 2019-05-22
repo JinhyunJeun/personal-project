@@ -27,15 +27,15 @@ public class BoardController {
         return "board/list";
     }
 
-    @RequestMapping(value="/detail_view", method=RequestMethod.GET)
-    public String detail_view() {
-        return "board/detail";
-    }
+    // @RequestMapping(value="/detail_view", method=RequestMethod.GET)
+    // public String detail_view() {
+    //     return "board/detail";
+    // }
 
-    @RequestMapping(value="/form", method=RequestMethod.GET)
-    public String form() {
-        return "board/form";
-    }
+    // @RequestMapping(value="/form", method=RequestMethod.GET)
+    // public String form() {
+    //     return "board/form";
+    // }
     
     @RequestMapping(value="/api/list_view", method=RequestMethod.GET)
     @ResponseBody

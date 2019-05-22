@@ -36,6 +36,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+
               <table id="id_git_List_view" class="table table-bordered table-hover display">
                 <thead>
                     <tr>
@@ -48,7 +49,7 @@
                 </thead>
               </table>
               <button type="button" id="btn_GoList" onclick="javascript: location.href='/'" class="btn btn-default">뒤로가기</button>
-              <button type="button" id="btn_create" class="btn btn-danger pull-right" data-toggle="modal" data-target="#modal_Create">새 글 쓰기</button>
+              <button type="button" id="btn_create" class="btn btn-danger pull-right" data-toggle="modal" data-target="#modal_Create" data-mode="add">새 글 쓰기</button>
             </div>
             <!-- /.box-body -->
           </div>
@@ -104,17 +105,15 @@
                               </div>
                           </div>
                         <div class="form-group">
-                          <textarea type="text" class="form-control" id="modal_Content"></textarea>
+                          <textarea type="text" class="form-control" id="modal_Content" placeholder="Content"></textarea>
                         </div>
                   </form>
                 
               </div>
-              <div class="modal-body">
-                <p>One fine body&hellip;</p>
-              </div>
+              
               <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" id="btn_submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">닫기</button>
+                <button type="button" id="btn_submit" class="btn btn-primary">저장하기</button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -142,10 +141,17 @@ $(document).ready(function(){
       },
           columns: [
               { data: "id" },
-              { width: "70%", data: "title" },
-              { width: "30%", data: "tags" },
+              {
+                width: "60%",
+                data: "title",
+                render: function(data, type, row, meta) {
+                     return '<a data-toggle="modal" href="#modal_Create">'+data+'</a>';
+                 }
+              },
+              // { width: "60%", data: "title" },
+              { width: "28%", data: "tags" },
               { data: "regUser" },
-              { data: "regDt" }
+              { width: "12%", data: "regDt" }
           ]
   });
   
@@ -178,10 +184,11 @@ $(document).ready(function(){
   });
   
   $('#btn_submit').click(function(){
+    var time = currentTime();
     var reqData = {
       title: $('#modal_Title').val(),
       tags: $('#modal_Tags').val(),
-      regDt: $('#modal_CreatedTime').val(),
+      regDt: time,
       content: $('#modal_Content').val(),
       url: $('#modal_Url').val(),
       property: $('#modal_Add_Property').val()
@@ -192,12 +199,11 @@ $(document).ready(function(){
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(reqData),
         success: function() {
-          alert('success');
-          window.close();
-          location.href="/board/list_view";
+            window.close();
+            location.href="/board/list_view";
         },
         error: function() {
-          alert('ajax error');
+            alert('ajax error');
         }
     });
   });
