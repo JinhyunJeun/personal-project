@@ -66,4 +66,18 @@ public class BoardController {
         int id = model.getId();
         return service.selectOne(id);
     }
+
+    @RequestMapping(value="/api/delete", method=RequestMethod.GET)
+    @ResponseBody
+    public void delete(@RequestBody BoardModel model) {
+        int id = model.getId();
+        service.deleteOne(id);
+    }
+
+    @RequestMapping(value="/api/updateDelete", method=RequestMethod.POST)
+    @ResponseBody
+    public void updateDelete(@RequestBody BoardModel model) {
+        int id = model.getId();
+        service.updateDelete(id);
+    }
 }
