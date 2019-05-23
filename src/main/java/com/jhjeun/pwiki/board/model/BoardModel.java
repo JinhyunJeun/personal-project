@@ -9,7 +9,7 @@ public class BoardModel {
     private String content;
     private String regUser;
     private String regDt;
-    private String icon;
+    private String url;
     private String deleteYn;
     private String tags;
     private String updDt;

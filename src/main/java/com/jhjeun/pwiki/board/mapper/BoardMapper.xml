@@ -10,7 +10,7 @@
             reg_user as regUser,
             reg_dt as regDt,
             upd_dt as updDt,
-            menu_icon as icon,
+            url as url,
             tags as tags
         FROM
         tbl_board
@@ -26,6 +26,7 @@
             reg_User as regUser,
             reg_dt as regDt,
             upd_dt as updDt,
+            url as url,
             tags as tags,
             property
         FROM
@@ -53,6 +54,7 @@
             reg_dt,
             delete_yn,
             tags,
+            url,
             upd_dt,
             property
         )
@@ -64,6 +66,7 @@
             #{regDt},
             #{deleteYn},
             #{tags},
+            #{url},
             #{updDt},
             #{property}
         )
@@ -84,6 +87,7 @@
                 title = #{title},
                 content = #{content},
                 upd_dt = #{updDt},
+                url = #{url},
                 property = #{property},
                 tags = #{tags}
             )

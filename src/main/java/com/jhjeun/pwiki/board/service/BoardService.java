@@ -18,8 +18,8 @@ public class BoardService {
         return listAll;
     }
 
-    public List<BoardModel> selectOne(int id) {
-        List<BoardModel> selectOne = mapper.selectOne(id);
+    public BoardModel selectOne(int id) {
+        BoardModel selectOne = mapper.selectOne(id);
         return selectOne;
     }
 

@@ -2,6 +2,8 @@ package com.jhjeun.pwiki.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.jhjeun.pwiki.board.model.BoardModel;
 import com.jhjeun.pwiki.board.service.BoardService;
 
@@ -44,17 +46,24 @@ public class BoardController {
         return list;
     }
 
-    @RequestMapping(value="/api/detail_view_{id}", method=RequestMethod.GET)
-    public List<BoardModel> detail_view(@PathVariable int id, @RequestParam String deleteYn, Model model) {
-        List<BoardModel> list = service.selectOne(id);
+    // @RequestMapping(value="/api/detail_view_{id}", method=RequestMethod.GET)
+    // public List<BoardModel> detail_view(@PathVariable int id, @RequestParam String deleteYn, Model model) {
+    //     List<BoardModel> list = service.selectOne(id);
         
-        return list;
-    }
+    //     return list;
+    // }
 
     @RequestMapping(value="/api/create", method=RequestMethod.POST)
     @ResponseBody
     public void form(@RequestBody BoardModel model) {
         model.setDeleteYn("N");
         service.create(model);
+    }
+
+    @RequestMapping(value="/api/update_view", method=RequestMethod.POST)
+    @ResponseBody
+    public BoardModel selectOne(@RequestBody BoardModel model) {
+        int id = model.getId();
+        return service.selectOne(id);
     }
 }

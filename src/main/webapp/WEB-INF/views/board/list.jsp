@@ -49,7 +49,7 @@
                 </thead>
               </table>
               <button type="button" id="btn_GoList" onclick="javascript: location.href='/'" class="btn btn-default">뒤로가기</button>
-              <button type="button" id="btn_create" class="btn btn-danger pull-right" data-toggle="modal" data-target="#modal_Create" data-mode="add">새 글 쓰기</button>
+              <button type="button" id="btn_create" class="btn btn-danger pull-right" data-toggle="modal" data-target="#modal" data-mode="add">새 글 쓰기</button>
             </div>
             <!-- /.box-body -->
           </div>
@@ -58,7 +58,7 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-      <div class="modal fade" id="modal_Create">
+      <div class="modal fade" id="modal">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -100,7 +100,7 @@
                               </div>
                               <div class="row">
                                   <div class="col-md-12">
-                                      <input type="text" name="modal_Add_Property" id="modal_Add_Property" class="form-control" placeholder="Add a Property"/>
+                                      <input type="text" name="modal_Add_Property" id="modal_Add_Property" class="form-control" placeholder="Add Property"/>
                                   </div>
                               </div>
                           </div>
@@ -132,80 +132,122 @@
 <jsp:include page="../common/footerScript.jsp"/>
 <script>
 $(document).ready(function(){
-  $('#id_git_List_view').DataTable({
-      ajax: {
-          url:'/board/api/list_view',
-          dataSrc: '',
-          processing: true,
-          paging: true
-      },
-          columns: [
-              { data: "id" },
-              {
-                width: "60%",
-                data: "title",
-                render: function(data, type, row, meta) {
-                     return '<a data-toggle="modal" href="#modal_Create">'+data+'</a>';
-                 }
-              },
-              // { width: "60%", data: "title" },
-              { width: "28%", data: "tags" },
-              { data: "regUser" },
-              { width: "12%", data: "regDt" }
-          ]
-  });
-  
-  function currentTime(){
-      var today = new Date();
-      var yyyy = today.getFullYear();
-      var mm = today.getMonth();
-      var dd = today.getDate()+1;
-      var hour = today.getHours();
-      var minutes = today.getMinutes();
-      if(dd<10) {
-          dd = '0'+dd;
-      }
+	var id = $('#id_id').val();
 
-      if(mm<10) {
-          mm = '0'+mm;
-      }
-      if(minutes<10) {
-          minutes = '0'+minutes;
-      }
-      today = yyyy+'년'+' '+mm+'월'+' '+dd+'일,'+' '+hour+':'+minutes+'분';
-      return today;
-  };
-  
-  $('#btn_create').click(function(){
-    //   console.log(currentTime());
-      var now = currentTime();
-      $('#modal_CreatedTime').html('<span>'+now+'</span>');
-      $('#modal_UpdatedTime').html('<span>'+now+'</span>');
-  });
-  
-  $('#btn_submit').click(function(){
-    var time = currentTime();
-    var reqData = {
-      title: $('#modal_Title').val(),
-      tags: $('#modal_Tags').val(),
-      regDt: time,
-      content: $('#modal_Content').val(),
-      url: $('#modal_Url').val(),
-      property: $('#modal_Add_Property').val()
-    }
-    $.ajax({
-        url: "/board/api/create",
-        method: "POST",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(reqData),
-        success: function() {
-            window.close();
-            location.href="/board/list_view";
-        },
-        error: function() {
-            alert('ajax error');
-        }
-    });
-  });
+	//render table as datatable
+	$('#id_git_List_view').DataTable({
+		ajax: {
+			url:'/board/api/list_view',
+			dataSrc: '',
+			processing: true,
+			paging: true
+		},
+			columns: [
+				{ data: "id" },
+				{
+					width: "60%",
+					data: "title",
+					render: function(data, type, row) {
+						return '<a data-toggle="modal" href="#modal" data-mode="edit" data-id="'+row.id+'">'+data+'</a>';
+					}
+				},
+				// { width: "60%", data: "title" },
+				{ width: "28%", data: "tags" },
+				{ data: "regUser" },
+				{ width: "12%", data: "regDt" }
+			]
+	});
+
+	//modal detail view, edit view
+	$('#modal').on("shown.bs.modal", function(event){
+		var modalEvent = $(event.relatedTarget);
+		var mode = modalEvent.data('mode');
+		var id = modalEvent.data('id');
+		var updDt = currentTime();
+		var reqData = {
+			id: id
+		}
+		if(mode=='edit') {
+			$.ajax({
+				url: '/board/api/update_view',
+				method: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify(reqData),
+				success: function(resData) {
+					$('#modal_Title').val(resData.title);
+					$('#modal_Tags').val(resData.tags);
+					$('#modal_Url').val(resData.url);
+					$('#modal_CreatedTime').val(resData.regDt);
+					$('#modal_UpdatedTime').val(resData.updDt);
+					$('#modal_Content').val(resData.content);
+					$('#modal_Add_Property').val(resData.property);
+				},
+				error: function() {
+					alert('ajax error');
+				}
+			});
+			$('#modal_UpdatedTime').val(updDt);
+		}
+	});
+
+	//fucntion current time
+	function currentTime(){
+		var today = new Date();
+		var yyyy = today.getFullYear();
+		var mm = today.getMonth()+1;
+		var dd = today.getDate();
+		var hour = today.getHours();
+		var minutes = today.getMinutes();
+		if(dd<10) {
+			dd = '0'+dd;
+		}
+
+		if(mm<10) {
+			mm = '0'+mm;
+		}
+		if(minutes<10) {
+			minutes = '0'+minutes;
+		}
+		today = yyyy+'년'+' '+mm+'월'+' '+dd+'일,'+' '+hour+':'+minutes+'분';
+		return today;
+	};
+
+	//add time to newly created content
+	$('#btn_create').click(function(){
+		//   console.log(currentTime());
+		var now = currentTime();
+		$('#modal_CreatedTime').html('<span>'+now+'</span>');
+		$('#modal_UpdatedTime').html('<span>'+now+'</span>');
+	});
+
+	//create content and send data to server
+	$('#btn_submit').click(function(event){
+		var time = currentTime();
+		// var modalEvent = $(event.relatedTarget);
+		// var mode = modalEvent.data('mode');
+		// console.log(mode);
+		var reqData = {
+			title: $('#modal_Title').val(),
+			tags: $('#modal_Tags').val(),
+			regDt: time,
+			content: $('#modal_Content').val(),
+			url: $('#modal_Url').val(),
+			property: $('#modal_Add_Property').val()
+		}
+
+		$.ajax({
+			url: "/board/api/create",
+			method: "POST",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(reqData),
+			success: function() {
+				window.close();
+				location.href="/board/list_view";
+			},
+			error: function() {
+				alert('ajax error');
+			}
+		});
+  	});
 });
 </script>

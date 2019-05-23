@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface BoardMapper {
     List<BoardModel> listAll();
-    List<BoardModel> selectOne(
+    BoardModel selectOne(
         @Param("id") int id
     );
     int countRows();
