@@ -7,6 +7,7 @@
 <html>
 <head>
     <jsp:include page="../common/common_head.jsp"/>
+    <link rel="stylesheet" href="/myCss.css">
 </head>
 
 <jsp:include page="../common/header.jsp"/>
@@ -59,9 +60,10 @@
       </div>
       <!-- /.row -->
       <div class="modal fade" id="modal">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
+              <button type="button" class="fullscreen" data-target="#modal-fullscreen">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
                   <form role="form" id="modal_Create_Form">
@@ -125,7 +127,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
+
 <jsp:include page="../common/footer.jsp"/>
 <jsp:include page="../common/common_footer.jsp"/>
 <jsp:include page="../common/datatable.jsp"/>
@@ -234,6 +236,8 @@ $(document).ready(function(){
 			url: $('#modal_Url').val(),
 			property: $('#modal_Add_Property').val()
 		}
+    if()
+    $('#modal').remove();
 
 		$.ajax({
 			url: "/board/api/create",
