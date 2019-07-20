@@ -94,10 +94,10 @@
                               </div>
                               <div class="row">
                                   <div class="col-md-3">
-                                      <label for="modal_Url" class="fa fa-link">&emsp;Url</label>
+                                      <label for="modal_Website" class="fa fa-link">&emsp;Website</label>
                                   </div>
                                   <div class="col-md-9">
-                                      <input type="text" name="modal_Url" id="modal_Url" class="form-control" placeholder="Empty"/>
+                                      <input type="text" name="modal_Website" id="modal_Website" class="form-control" placeholder="Empty"/>
                                   </div>
                               </div>
                               <div class="row">
@@ -178,7 +178,7 @@ $(document).ready(function(){
 				success: function(resData) {
 					$('#modal_Title').val(resData.title);
 					$('#modal_Tags').val(resData.tags);
-					$('#modal_Url').val(resData.url);
+					$('#modal_Website').val(resData.website);
 					$('#modal_CreatedTime').val(resData.regDt);
 					$('#modal_UpdatedTime').val(resData.updDt);
 					$('#modal_Content').val(resData.content);
@@ -233,10 +233,10 @@ $(document).ready(function(){
 			tags: $('#modal_Tags').val(),
 			regDt: time,
 			content: $('#modal_Content').val(),
-			url: $('#modal_Url').val(),
+			website: $('#modal_Website').val(),
 			property: $('#modal_Add_Property').val()
 		}
-    if()
+    
     $('#modal').remove();
 
 		$.ajax({

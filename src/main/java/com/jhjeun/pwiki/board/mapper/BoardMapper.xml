@@ -10,7 +10,7 @@
             reg_user as regUser,
             reg_dt as regDt,
             upd_dt as updDt,
-            url as url,
+            website,
             tags as tags
         FROM
         tbl_board
@@ -26,7 +26,7 @@
             reg_User as regUser,
             reg_dt as regDt,
             upd_dt as updDt,
-            url as url,
+            website,
             tags as tags,
             property
         FROM
@@ -54,7 +54,7 @@
             reg_dt,
             delete_yn,
             tags,
-            url,
+            website,
             upd_dt,
             property
         )
@@ -66,7 +66,7 @@
             #{regDt},
             #{deleteYn},
             #{tags},
-            #{url},
+            #{website},
             #{updDt},
             #{property}
         )
@@ -87,7 +87,7 @@
                 title = #{title},
                 content = #{content},
                 upd_dt = #{updDt},
-                url = #{url},
+                website = #{website},
                 property = #{property},
                 tags = #{tags}
             )

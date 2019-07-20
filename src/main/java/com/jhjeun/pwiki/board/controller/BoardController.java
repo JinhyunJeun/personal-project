@@ -38,15 +38,11 @@ public class BoardController {
     @ResponseBody
     public List<BoardModel> list(){
         List<BoardModel> list = service.listAll();
+        System.out.println("=================================================================");
+        System.out.println(list.toString());
+        System.out.println("=================================================================");
         return list;
     }
-
-    // @RequestMapping(value="/api/detail_view_{id}", method=RequestMethod.GET)
-    // public List<BoardModel> detail_view(@PathVariable int id, @RequestParam String deleteYn, Model model) {
-    //     List<BoardModel> list = service.selectOne(id);
-        
-    //     return list;
-    // }
 
     @RequestMapping(value="/api/create", method=RequestMethod.POST)
     @ResponseBody

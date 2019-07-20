@@ -38,3 +38,43 @@ SELECT
         tbl_board
         WHERE 
         delete_yn = 'N'
+--190629
+show databases
+use pwiki
+show tables
+desc tbl_board
+CREATE table tbl_food
+(
+    id int not null primary key,
+    food_name varchar(20) not null,
+    calorie varchar(30),
+    num int default 1,
+    food_weight int
+) 
+default charset=utf8
+desc tbl_food
+
+--190720
+use pwiki
+show tables
+CREATE table tbl_board
+(
+    id int not null primary key,
+    title varchar(50) not null,
+    content text,
+    reg_user varchar(20) not null,
+    reg_dt timestamp default now(),
+    upd_dt varchar(20),
+    delete_yn char(1),
+    property varchar(100),
+    website varchar(200),
+    tags varchar(100)
+)
+default charset=utf8
+show tables
+desc tbl_board
+alter table tbl_board change reg_dt reg_dt varchar(20) default null
+alter table tbl_board change reg_dt reg_dt timestamp default now()
+show databases
+use mysql
+select Host, User from user
