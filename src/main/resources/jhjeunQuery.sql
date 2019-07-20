@@ -78,3 +78,8 @@ alter table tbl_board change reg_dt reg_dt timestamp default now()
 show databases
 use mysql
 select Host, User from user
+desc tbl_board
+alter table tbl_board change reg_user reg_user varchar(20)
+alter table tbl_board change id id int not null auto_increment
+alter table tbl_board change reg_dt reg_dt varchar(30) not null
+

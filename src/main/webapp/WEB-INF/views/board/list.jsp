@@ -216,7 +216,6 @@ $(document).ready(function(){
 
 	//add time to newly created content
 	$('#btn_create').click(function(){
-		//   console.log(currentTime());
 		var now = currentTime();
 		$('#modal_CreatedTime').html('<span>'+now+'</span>');
 		$('#modal_UpdatedTime').html('<span>'+now+'</span>');
