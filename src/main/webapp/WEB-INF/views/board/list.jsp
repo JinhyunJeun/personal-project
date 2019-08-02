@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        WILT(What I Learned Today)
+        <spring:message code="menu.title.view.WILT"/>
         <small>Git</small>
       </h1>
       <ol class="breadcrumb">
