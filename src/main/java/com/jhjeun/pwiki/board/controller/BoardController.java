@@ -38,9 +38,7 @@ public class BoardController {
     @ResponseBody
     public List<BoardModel> list(){
         List<BoardModel> list = service.listAll();
-        System.out.println("=================================================================");
-        System.out.println(list.toString());
-        System.out.println("=================================================================");
+        
         return list;
     }
 

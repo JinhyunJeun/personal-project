@@ -18,13 +18,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <spring:message code="menu.title.view.WILT"/>
-        <small>Git</small>
+        <spring:message code="wilt.view.list.title.wilt" />
+        <small><spring:message code="wilt.view.list.subtitle.git" /></small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">WILT</a></li>
-        <li class="active">Git</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> <spring:message code="breadcrumb.view.home" /></a></li>
+        <li><a href="#"><spring:message code="breadcrumb.view.wilt" /></a></li>
+        <li class="active"><spring:message code="breadcrumb.view.git" /></li>
       </ol>
     </section>
 
@@ -43,15 +43,15 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>title</th>
-                        <th>tags</th>
-                        <th>regUser</th>
-                        <th>regDt</th>
+                        <th><spring:message code="git.list.view.title" /></th>
+                        <th><spring:message code="git.list.view.tags" /></th>
+                        <th><spring:message code="git.list.view.regUser" /></th>
+                        <th><spring:message code="git.list.view.regDt" /></th>
                     </tr>
                 </thead>
               </table>
-              <button type="button" id="btn_GoList" onclick="javascript: location.href='/'" class="btn btn-default">뒤로가기</button>
-              <button type="button" id="btn_create" class="btn btn-danger pull-right" data-toggle="modal" data-target="#modal" data-mode="add">새 글 쓰기</button>
+              <button type="button" id="btn_GoList" onclick="javascript: location.href='/'" class="btn btn-default"><spring:message code="common.button.view.return" /></button>
+              <button type="button" id="btn_create" class="btn btn-danger pull-right" data-toggle="modal" data-target="#modal" data-mode="add"><spring:message code="common.button.view.new_document" /></button>
             </div>
             <!-- /.box-body -->
           </div>
@@ -64,7 +64,7 @@
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="fullscreen" data-target="#modal-fullscreen">
+              <button type="button" class="modal-fullscreen" data-target="#modal-fullscreen">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
                   <form role="form" id="modal_Create_Form">

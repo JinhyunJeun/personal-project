@@ -82,4 +82,53 @@ desc tbl_board
 alter table tbl_board change reg_user reg_user varchar(20)
 alter table tbl_board change id id int not null auto_increment
 alter table tbl_board change reg_dt reg_dt varchar(30) not null
-
+--190808
+show databases
+use pwiki
+show tables
+alter table tbl_food convert to character set utf8
+select * from tbl_board
+--190810
+desc tbl_board
+alter table tbl_board change id id int not null auto_increment
+alter table tbl_board change reg_user reg_user varchar(20) default null
+create table code 
+    (
+        id int not null primary key auto_increment,
+        mode varchar(10)
+    )
+    default charset=utf8
+desc code
+insert into code (mode) values ('edit'), 
+                            ('delete'),
+                            ('new')
+select * from code
+drop table code;
+create table pwiki_code
+(
+    code_group varchar(32) not null,
+    code_id varchar(32) not null,
+    code_name varchar(50),
+    code_etc varchar(50),
+    display_order int not null,
+    reg_dt datetime,
+    primary key(code_group, code_id)
+)
+default charset=utf8
+desc pwiki_code
+alter table pwiki_code change display_order display_order int not null default 0
+insert into pwiki_code 
+(
+    code_group, code_id, code_name, code_etc
+) 
+values
+(
+    'WRITING', 'edit', '수정', '수정'
+),
+(
+    'WRITING', 'delete', '삭제', '삭제'
+),
+(
+    'WRITING', 'create', '생성', '생성' 
+)
+select * from pwiki_code
